@@ -6,9 +6,9 @@ import axios from 'axios';
 import './config.js';
 import apiKey from './config';
 import SearchForm from './Components/SearchForm';
-import Photo from './Components/photos/Photo';
-import PhotoContainer from './Components/PhotoContainer';
-import React, {Component} from 'react';
+//import Photo from './Components/photos/Photo';
+//import PhotoContainer from './Components/PhotoContainer';
+
 
 export default class App extends React.Component {
  //constructor initializes state and set it equal to an object
