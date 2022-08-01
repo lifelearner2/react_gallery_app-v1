@@ -31,7 +31,7 @@ axios.get(apiKey)
   })
 }
 
- App() {
+ render() {
   return (
     <div className="App">
       <header className="App-header">
