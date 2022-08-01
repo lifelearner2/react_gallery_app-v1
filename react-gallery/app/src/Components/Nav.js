@@ -24,7 +24,7 @@ const Nav = () => (
   
         <Switch>
           <Route exact path="/" component={Index} />
-          <Route path="/photo" render={() => <Photo title='PHoto'/> } />
+          <Route path="/photo" render={() => <Photo title='Photo'/> } />
           <Route exact path="/PhotoContainer" component={PhotoContainer}/>
           <Route path="/photo/:type/:name" component={Featured}/>
           <Route path="SearchForm" component= {SearchForm}/>
