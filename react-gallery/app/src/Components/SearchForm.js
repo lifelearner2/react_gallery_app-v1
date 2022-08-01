@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 
-export default class SearchForm extends Component {
+export default class SearchForm extends React.Component {
   
   state = {
     searchText: ''

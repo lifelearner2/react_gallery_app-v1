@@ -1,41 +1,37 @@
 //This file serves as my main container component
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import './config.js';
 import apiKey from './config';
 import SearchForm from './Components/SearchForm';
-import Photo from './Components/Photo';
+import Photo from './Components/photos/Photo';
 import PhotoContainer from './Components/PhotoContainer';
+import React, {Component} from 'react';
 
-export default class App extends Component {
-
+export default class App extends React.Component {
  //constructor initializes state and set it equal to an object
   //because photo is set to an empty array the not found image briefly flashes on screen prior to the default photos. So we need to add a loading indicator that lets users know the data is loading.
-  constructor() {
+  constructor ()  {
     super();
-    this.state = ({
+    this.state = {
       photo: [],
       loading: true
-    };
-  })
-
-  componentDidMount() {
-    axios.get(apiKey)
-      .then(response => {
-        this.setState({
-          photo: response.data.data
-        });
-    })
-  
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-    });
+    }
   }
 
-render () {
-  console.log(this.state.PhotoContainer);
+componentDidMount() {
+axios.get(apiKey)
+  .then(res => {
+    console.log(res.data);
+  })
+  .catch(error => {
+    console.log(error);
+  })
+}
+
+ App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -54,6 +50,7 @@ render () {
       </header>
     </div>
   );
+
 }
 
-export default App;
+}
