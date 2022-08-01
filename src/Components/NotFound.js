@@ -2,7 +2,7 @@
 //this is a stateless component - meaning it can only use the data that is passed to it via props.
 
 
-import React, {Component} from 'react';
+import React from 'react';
 
 //this is to provide info to user if no photos are found from their search
 const NotFound = props => (
