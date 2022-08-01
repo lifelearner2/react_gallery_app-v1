@@ -16,22 +16,38 @@ export default class App extends React.Component {
   constructor ()  {
     super();
     this.state = {
-      photo: [],
+      photos: [],
       loading: true
     }
   }
 
+// componentDidMount() {
+//   // fetch('https://www.flickr.com/photos/196178558@N04/galleries/72157720929148696/?api_key=4f98391dd31e865ab36cee1d97cc5e4e')
+//   //   .then(response => response.json())
+//   //   .then(responseData => {
+//   //     this.setState({ photos: responseData.data });
+//   //   })
+//   //   .catch(error => {
+//   //     console.log('Error fetching and parsing data', error);
+//   //   });
+// }
+//do I need to install the fetch polyfill?
+
+
 componentDidMount() {
-axios.get(apiKey)
-  .then(res => {
-    console.log(res.data);
+axios.get('https://www.flickr.com/photos/196178558@N04/galleries/72157720929148696/?api_key=4f98391dd31e865ab36cee1d97cc5e4e')
+  .then(response => {
+    this.setState({
+      photos: response.data.data
+    })
   })
   .catch(error => {
-    console.log(error);
+    console.log('Error fetching and parsing data', error);
   })
 }
 
- render() {
+ render(){
+   console.log(this.state.photos);
   return (
     <div className="App">
       <header className="App-header">

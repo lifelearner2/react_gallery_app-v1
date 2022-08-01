@@ -1,6 +1,6 @@
 //created one container for all photos so that I just render it once rather than indiv for all three types of photos
 
-import React, {Component} from 'react';
+import React from 'react';
 import Photo from './Photo';
 
 

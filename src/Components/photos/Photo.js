@@ -1,7 +1,7 @@
 //This component/file is to display the li and img elements.
 //This is a Stateless Component - meaning it can only use the data that is passed to it via props.
 
-import React, {Component} from 'react';
+import React from 'react';
 import NotFound from '../NotFound';
 
 //this contains the template for presentation on the site
