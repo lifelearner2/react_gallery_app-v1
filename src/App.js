@@ -5,10 +5,14 @@ import './App.css';
 import axios from 'axios';
 import './config.js';
 import apiKey from './config';
+import apiKey2 from './config';
 import SearchForm from './Components/SearchForm';
+import PhotoContainer from './Components/photos/PhotoContainer';
 //import Photo from './Components/photos/Photo';
 //import PhotoContainer from './Components/PhotoContainer';
 
+const url = `{'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&per_page=16&sort=relevance&content_type=1&format=json&nojsoncallback=1'}`
+const url2 = `{'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey2}&text=${query}&per_page=16&sort=relevance&content_type=1&format=json&nojsoncallback=1'}`
 
 export default class App extends React.Component {
  //constructor initializes state and set it equal to an object
@@ -22,7 +26,7 @@ export default class App extends React.Component {
   }
 
 // componentDidMount() {
-//   // fetch('https://www.flickr.com/photos/196178558@N04/galleries/72157720929148696/?api_key=4f98391dd31e865ab36cee1d97cc5e4e')
+//   // fetch(url)
 //   //   .then(response => response.json())
 //   //   .then(responseData => {
 //   //     this.setState({ photos: responseData.data });
@@ -34,17 +38,29 @@ export default class App extends React.Component {
 //do I need to install the fetch polyfill?
 
 
+// componentDidMount() {
+// axios.get (url)
+//   .then(response => {
+//     this.setState({
+//       photos: response.data.data
+//     })
+//   })
+//   .catch(error => {
+//     console.log('Error fetching and parsing data', error);
+//   })
+// }
+
 componentDidMount() {
-axios.get('https://www.flickr.com/photos/196178558@N04/galleries/72157720929148696/?api_key=4f98391dd31e865ab36cee1d97cc5e4e')
-  .then(response => {
-    this.setState({
-      photos: response.data.data
+  axios.get (url2)
+    .then(response => {
+      this.setState({
+        photos: response.data.data
+      })
     })
-  })
-  .catch(error => {
-    console.log('Error fetching and parsing data', error);
-  })
-}
+    .catch(error => {
+      console.log('Error fetching and parsing data', error);
+    })
+  }
 
  render(){
    console.log(this.state.photos);
@@ -66,7 +82,24 @@ axios.get('https://www.flickr.com/photos/196178558@N04/galleries/721577209291486
       </header>
     </div>
   );
-
 }
+
+
+// render(){
+//   console.log(this.state.photos);
+//  return (
+//    <div>
+//     <div className="photo-container">
+//       <div className="">
+//         <h1 className=""></h1>
+//         <SearchForm />
+//       </div>
+//     </div>
+//    </div className="">
+//    <PhotoContainer data={this.state.photos} />
+   
+  
+//  );
+// }
 
 }
