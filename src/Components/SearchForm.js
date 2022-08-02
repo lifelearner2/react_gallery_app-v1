@@ -13,7 +13,7 @@ export default class SearchForm extends Component {
     this.setState({ searchText: e.target.value });
   }
 
-    //reference the input with this.query
+    //reference the input with this.query - Need to define function 
     handleSubmit = e => {
         e.preventDefault();
         this.props.onSearch(this.query.value);

@@ -21,7 +21,7 @@ const browserRouter = () => (
     <div className="container">
       <Switch>
         <Route exact path="/" component={index} />
-        <Route path="/photo" render={() => <Photo title='Photo'/> } />
+        <Route path="/photo" component={Photo} />
         <Route exact path="/PhotoContainer" component={PhotoContainer}
             render={ () => <PhotoContainer data={Photo} /> } />
         <Route path="SearchForm" component= {SearchForm}/>
@@ -33,7 +33,7 @@ const browserRouter = () => (
 
 
 export default class App extends Component {
- //constructor initializes state and set it equal to an object
+ //constructor initializes state and set it equal to an object. Needed to bind "this" so it was recognized elsewhere on page.
   constructor() {
     super();
     this.state = {
@@ -42,7 +42,8 @@ export default class App extends Component {
         kittens: [],
         forests: [],
         query:'beaches'
-      };
+      }; 
+      this.SearchPhotos=this.SearchPhotos.bind(this);  
     }
    
     fetchData = (query = this.state.query) => {
@@ -74,11 +75,22 @@ export default class App extends Component {
     this.fetchData('beaches')
   }
 
+  
+  //update state and render in render function 
+  SearchPhotos(userInput) {
+    this.setState({ query: userInput })
+    console.log(userInput);
+  }
 
-  render(){
-    return (
-      <div>Hi Jeanene</div>
-    );
+  //write to update query if query=kittens etc
+  render () {
+   return (  
+      <div>
+        <SearchForm onSearch={this.SearchPhotos}> test </SearchForm>
+        <PhotoContainer photos={this.state.beaches}/> 
+      </div>
+    )
+ 
   }
 
 }
