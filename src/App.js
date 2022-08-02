@@ -41,7 +41,8 @@ export default class App extends Component {
         beaches: [],
         kittens: [],
         forests: [],
-        query:'beaches'
+        query:'beaches',
+        loading: true
       }; 
       this.SearchPhotos=this.SearchPhotos.bind(this);  
     }
