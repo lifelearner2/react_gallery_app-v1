@@ -18,7 +18,7 @@ import {
 //can't use App as variable as it's being used in the export class below
 const browserRouter = () => (
   <BrowserRouter>
-    <div className="container">
+    <div className="main-nav">
       <Switch>
         <Route exact path="/" component={index} />
         <Route path="/photo" component={Photo} />
@@ -88,6 +88,12 @@ export default class App extends Component {
       <div>
         <SearchForm onSearch={this.SearchPhotos}> test </SearchForm>
         <PhotoContainer photos={this.state.beaches}/> 
+        {/* if (userInput === 'kittens' {
+          <PhotoContainer photos={this.state.kittens}/> 
+        })
+       
+        <PhotoContainer photos={this.state.forests}/>  */}
+
       </div>
     )
  
