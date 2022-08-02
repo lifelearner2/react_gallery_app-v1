@@ -1,10 +1,8 @@
 //This file serves as my main container component
 import React, { Component } from 'react'
-import './App.css';
 import apiKey from './config';
 
-import index from './index';
-import Photo from './Components/Photo';
+import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
 import SearchForm from './Components/SearchForm';
 import NotFound from './Components/NotFound';
@@ -12,25 +10,11 @@ import NotFound from './Components/NotFound';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 
 //can't use App as variable as it's being used in the export class below
-const browserRouter = () => (
-  <BrowserRouter>
-    <div className="main-nav">
-      <Switch>
-        <Route exact path="/" component={index} />
-        <Route path="/photo" component={Photo} />
-        <Route exact path="/PhotoContainer" component={PhotoContainer}
-            render={ () => <PhotoContainer data={Photo} /> } />
-        <Route path="SearchForm" component= {SearchForm}/>
-        <Route component={NotFound} />
-      </Switch> 
-    </div>
-  </BrowserRouter>
-);
-
 
 export default class App extends Component {
  //constructor initializes state and set it equal to an object. Needed to bind "this" so it was recognized elsewhere on page.
@@ -44,7 +28,7 @@ export default class App extends Component {
         query:'beaches',
         loading: true
       }; 
-      this.SearchPhotos=this.SearchPhotos.bind(this);  
+      this.SearchPhotos = this.SearchPhotos.bind(this);  
     }
    
     fetchData = (query = this.state.query) => {
@@ -52,52 +36,56 @@ export default class App extends Component {
         .then(response => response.json())
         .then(responseData => {
           console.log(responseData.photos.photo)
-          if (query === 'kittens'){
-            this.setState({kittens: responseData.photos.photo });
-          }else if (query === 'beaches'){
+          if (query === 'beaches'){
             this.setState({beaches: responseData.photos.photo });
+          }else if (query === 'kittens'){
+            this.setState({kittens: responseData.photos.photo });
           }else if (query === 'forests'){
             this.setState({forests: responseData.photos.photo });
           }else {
             this.setState({photos: responseData.photos.photo });
           }
-
+          this.setState({
+            loading: false,
+          });
         })
         .catch(error =>{
           console.log('error fetching and parsing data', error)
-        });
-      
+        })
     }
 
-  componentDidMount () {
+  componentDidMount() {
     this.fetchData()
+    this.fetchData('beaches')
     this.fetchData('kittens')
     this.fetchData('forests')
-    this.fetchData('beaches')
   }
 
   
   //update state and render in render function 
   SearchPhotos(userInput) {
     this.setState({ query: userInput })
-    console.log(userInput);
+    this.fetchData(userInput)
   }
 
   //write to update query if query=kittens etc
   render () {
-   return (  
-      <div>
-        <SearchForm onSearch={this.SearchPhotos}> test </SearchForm>
-        <PhotoContainer photos={this.state.beaches}/> 
-        {/* if (userInput === 'kittens' {
-          <PhotoContainer photos={this.state.kittens}/> 
-        })
-       
-        <PhotoContainer photos={this.state.forests}/>  */}
-
+    return (
+      <div className='container'>  
+        <BrowserRouter>
+          <SearchForm onSearch={this.SearchPhotos}  />
+          <Nav />
+          <Switch>
+            <Route exact path="/"><Redirect to="/beaches"/></Route>
+            <Route path="/beaches" render={() => <PhotoContainer photos={this.state.beaches} loading={this.state.loading}/>}/>
+            <Route path="/kittens" render={() => <PhotoContainer photos={this.state.kittens} loading={this.state.loading}/>}/>
+            <Route path="/forests" render={() => <PhotoContainer photos={this.state.forests} loading={this.state.loading}/>}/>
+            <Route path="/search/:query" render={() => <PhotoContainer photos={this.state.photos} loading={this.state.loading}/>}/>
+            <Route component={NotFound}/>
+          </Switch>
+        </BrowserRouter>
       </div>
     )
- 
   }
 
 }

@@ -3,34 +3,18 @@
 
 //the nav links or browsers forward/back buttons should show the correct URL in bar
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import {
-    BrowserRouter,
-    Route,
-    Switch
-  } from 'react-router-dom';
+const Nav = () => {
+  return (
+    <nav className = "main-nav">
+      <ul>
+        <li><NavLink to="/beaches">Beaches</NavLink></li>
+        <li><NavLink to="/kittens">Kittens</NavLink></li>
+        <li><NavLink to="/forests">Forests</NavLink></li>
+      </ul>
+    </nav>
+  )
+}
 
- 
-  import index from './index';
-  import Photo from './Components/Photo';
-  import PhotoContainer from './Components/PhotoContainer';
-  import NotFound from './Components/NotFound';
-  import SearchForm from './Components/SearchForm';
-
-const Nav = () => (
-    <BrowserRouter>
-      <div className="container">
-        <Header />
-  
-        <Switch>
-          <Route exact path="/" component={index} />
-          <Route path="/photo" render={() => <Photo title='Photo'/> } />
-          <Route exact path="/PhotoContainer" component={PhotoContainer}/>
-          <Route path="SearchForm" component= {SearchForm}/>
-          <Route component={NotFound} />
-        </Switch> 
-      </div>
-    </BrowserRouter>
-  );
-
-  export default Nav;
+export default Nav

@@ -5,7 +5,7 @@ const PhotoContainer = props => {
     return(
         <div className='photo-container'>
                 <ul>
-                {props.photos.map(photo => <Photo photo={photo} key={photo.id} /> )}
+                {props.loading ? <>Loading...</> : props.photos.map(photo => <Photo photo={photo} key={photo.id} /> )}
                 </ul>
         </div>
     );

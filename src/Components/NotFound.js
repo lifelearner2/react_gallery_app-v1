@@ -5,7 +5,7 @@
 import React from 'react';
 
 //this is to provide info to user if no photos are found from their search
-const NotFound = props => (
+const NotFound = () => (
   <li className='not-found'>
    <h3>No Results Found</h3>
    <p>Your search did not return any results. Please try again.</p>
